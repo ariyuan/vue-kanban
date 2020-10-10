@@ -1,15 +1,5 @@
 <template>
   <div class="container mt-5">
-    <div class="row">
-      <div class="col form-inline">
-        <b-form-input
-          v-model="newTask"
-          placeholder="Enter Task"
-          @keyup.enter="add"
-        ></b-form-input>
-        <b-button class="ml-2" variant="primary" @click="add">Add</b-button>
-      </div>
-    </div>
     <div class="row mt-3">
       <div class="col-md-3">
         <div class="p-2 alert alert-primary">
@@ -27,6 +17,19 @@
               {{ ele.name }}
             </div>
           </draggable>
+          <a
+            href=""
+            @click.prevent="onAddingNewBlock = !onAddingNewBlock"
+            v-if="!onAddingNewBlock"
+            >+ Add new block</a
+          >
+          <b-form-input
+          v-model="newTask"
+          placeholder="Enter Task"
+          @keyup.enter="add"
+          v-if="onAddingNewBlock"
+          @blur="onInputLostfocus()"
+        ></b-form-input>
         </div>
       </div>
 
@@ -95,6 +98,7 @@ export default {
   },
   data() {
     return {
+      onAddingNewBlock: false,
       newTask: "",
       arrBacklog: [
         { name: "Code Sign Up page" },
@@ -108,10 +112,15 @@ export default {
     };
   },
   methods: {
+    onInputLostfocus(){
+      this.add();
+      this.onAddingNewBlock = false;
+    },
     add() {
       if (this.newTask) {
         this.arrBacklog.push({ name: this.newTask });
         this.newTask = "";
+        this.onAddingNewBlock = false;
       }
     },
   },
