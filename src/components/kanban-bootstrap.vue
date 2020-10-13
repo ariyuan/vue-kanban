@@ -5,6 +5,7 @@
         v-for="item in columns"
         :key="item.column_name"
         :arrList="item.content"
+        :column_name="item.column_name"
         :showAddButton="item.showAddButton"
         :columnclass="item.columnclass"
       ></kanbanColumn>
