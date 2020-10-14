@@ -2,9 +2,9 @@
   <div class="col-md-3">
     <div class="p-2 alert" :class="columnclass">
       <h3>{{ column_name }}</h3>
-      <draggable class="list-group kanban-column" :list="arrList" group="tasks">
-        <div class="list-group-item" v-for="ele in arrList" :key="ele.name">
-          {{ ele.name }}
+      <draggable class="kanban-column" :list="arrList" group="tasks">
+        <div v-for="ele in arrList" :key="ele.name">
+          <card :card="ele"></card>
         </div>
         <div slot="footer">
           <div v-if="showAddButton">
@@ -30,10 +30,12 @@
 
 <script>
 import draggable from "vuedraggable";
+import card from "./kanban-card"
 
 export default {
   components: {
     draggable,
+    card
   },
   props: ["showAddButton", "arrList", "columnclass", "column_name"],
   data() {

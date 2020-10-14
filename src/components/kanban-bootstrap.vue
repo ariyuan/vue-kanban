@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid mt-5">
-      <draggable class="row mt-3" :list="columns" group="tasks">
+      <draggable class="row mt-3" :list="columns" group="columns">
         <kanbanColumn
           v-for="item in columns"
           :key="item.column_name"
