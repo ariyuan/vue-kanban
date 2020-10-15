@@ -5,14 +5,25 @@
       <b-card-text class="small">
         {{ card.name }}
       </b-card-text>
-
-      <a href="#" class="card-link">...</a>
+      
+      
+      <cardDetail></cardDetail>
     </b-card>
   </div>
 </template>
 
 <script>
+import cardDetail from "./card-detail";
+
 export default {
+  components: {
+    cardDetail,
+  },
   props: ["card"],
+  methods: {
+    openDetail() {
+      console.log("Open card detail");
+    },
+  },
 };
 </script>
