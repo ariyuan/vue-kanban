@@ -1,14 +1,15 @@
 <template>
   <div>
-    <b-card>
-      <b-card-title title-tag="h5">title</b-card-title>
-      <b-card-text class="small">
-        {{ card.name }}
-      </b-card-text>
-      
-      
-      <cardDetail></cardDetail>
-    </b-card>
+    <div class="card">
+      <div class="card-body p-2">
+        <b-card-title title-tag="h5">title</b-card-title>
+        <b-card-text class="small">
+          {{ card.name }}
+        </b-card-text>
+
+        <cardDetail></cardDetail>
+      </div>
+    </div>
   </div>
 </template>
 
