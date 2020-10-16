@@ -4,8 +4,6 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import _ from 'lodash'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
 
@@ -16,8 +14,6 @@ Vue.prototype._ = _
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
-
-Vue.use(ElementUI)
 
 new Vue({
   render: h => h(App),
