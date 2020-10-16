@@ -11,7 +11,7 @@
 export default {
   data() {
     return {
-      card_id: this._.uniqueId("contact_"),
+      card_id: this._.uniqueId("card_"),
     };
   },
   created() {
