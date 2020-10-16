@@ -1,7 +1,9 @@
 <template>
-  <div id="app">
-    <kanban></kanban>
-  </div>
+  <v-app>
+    <div id="app">
+      <kanban></kanban>
+    </div>
+  </v-app>
 </template>
 
 <script>
