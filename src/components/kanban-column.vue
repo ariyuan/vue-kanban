@@ -2,7 +2,7 @@
   <div class="col-md-3">
     <div class="p-2 alert" :class="columnclass">
       <h3>{{ column_name }}</h3>
-      <draggable class="kanban-column" :list="arrList" group="tasks">
+      <draggable class="kanban-column" :list="arrList" group="tasks" animation="300" @add="add" @sort="sort">
         <div v-for="ele in arrList" :key="ele.name">
           <card :card="ele"></card>
         </div>
@@ -17,7 +17,7 @@
             <b-form-input
               v-model="newTask"
               placeholder="Enter Task"
-              @keyup.enter="add"
+              @keyup.enter="addTask"
               v-if="onAddingNewBlock"
               @blur="onInputLostfocus()"
             ></b-form-input>
@@ -46,16 +46,24 @@ export default {
   },
   methods: {
     onInputLostfocus() {
-      this.add();
+      this.addTask();
       this.onAddingNewBlock = false;
     },
-    add() {
+    addTask() {
       if (this.newTask) {
         this.arrList.push({ name: this.newTask });
         this.newTask = "";
         this.onAddingNewBlock = false;
       }
     },
+    add(){
+      console.log("Dragged");
+      console.log(this.$store.state.columns);
+    },
+    sort(){
+      console.log("Order changed");
+      console.log(this.arrList);
+    }
   },
 };
 </script>

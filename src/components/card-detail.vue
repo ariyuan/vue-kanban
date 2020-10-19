@@ -1,7 +1,7 @@
 <template>
   <div>
     <a href="#" @click="$bvModal.show(card_id)" class="float-right"
-      ><span class="badge badge-primary float-left">{{ story_point }}</span></a
+      ><span class="badge badge-primary">{{ story_point }}</span></a
     >
 
     <b-modal :id="card_id" title="BootstrapVue">

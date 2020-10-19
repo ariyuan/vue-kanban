@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import kanban from "@/components/kanban-bootstrap";
+import kanban from "@/components/kanban";
 
 export default {
   name: "App",

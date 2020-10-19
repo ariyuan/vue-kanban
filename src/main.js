@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import _ from 'lodash'
 import vuetify from '@/plugins/vuetify'
+import store from '@/data/data'
 
 Vue.config.productionTip = false
 
@@ -17,6 +18,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 new Vue({
+  store,
   vuetify,
   render: h => h(App),
 }).$mount('#app')

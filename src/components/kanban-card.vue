@@ -8,6 +8,7 @@
         </b-card-text>
 
         <cardDetail></cardDetail>
+        <v-chip x-small> {{ "Steve Gates" }}</v-chip>
       </div>
     </div>
   </div>
