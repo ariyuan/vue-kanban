@@ -3,12 +3,16 @@
     <div class="card">
       <div class="card-body p-2">
         <b-card-title title-tag="h5">title</b-card-title>
+
         <b-card-text class="small">
           {{ card.name }}
         </b-card-text>
 
         <cardDetail></cardDetail>
-        <v-chip x-small> {{ "Steve Gates" }}</v-chip>
+        <v-chip x-small>
+          <v-avatar left class="green darken-1">5</v-avatar
+          >{{ "Steve Gates" }}</v-chip
+        >
       </div>
     </div>
   </div>
