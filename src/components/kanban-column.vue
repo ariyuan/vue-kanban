@@ -3,7 +3,7 @@
     <div class="p-2 alert" :class="columnclass">
       <h3>{{ column_name }}</h3>
       <draggable class="kanban-column" :list="arrList" group="tasks" animation="300" @add="add" @sort="sort">
-        <div v-for="ele in arrList" :key="ele.name">
+        <div v-for="ele in arrList" :key="ele.title">
           <card :card="ele"></card>
         </div>
         <div slot="footer">
