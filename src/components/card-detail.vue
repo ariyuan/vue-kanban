@@ -8,23 +8,32 @@
           <span>Description:</span>
           <b-form-textarea
             id="textarea"
+            class="mt-2"
             v-model="card.desc"
             placeholder="Description placeholder"
             rows="3"
             max-rows="6"
           ></b-form-textarea>
           <br />
-          <v-select
-            :items="$store.state.candidate_point"
-            label="Story Point"
-            outlined
-            v-model="card.point"
-            @change="onPointChanged"
-          ></v-select>
         </div>
         <v-divider class="mx-2" vertical></v-divider>
-        <div class="col-2">
+        <div class="col">
           <span>Assignee:</span>
+          <div class="row container p-0 my-2">
+            <div class="col-10">
+              <v-chip class="ma-2" color="primary" outlined pill>
+                {{ card.owner }}
+              </v-chip>
+            </div>
+          </div>
+          <span>Story Point:</span>
+          <b-form-select
+            @change="onPointChanged"
+            v-model="card.point"
+            :options="$store.state.candidate_point"
+            size="sm"
+            class="mt-3"
+          ></b-form-select>
         </div>
       </div>
     </b-modal>
@@ -36,6 +45,8 @@ export default {
   data() {
     return {
       card_id: this._.uniqueId("card_"),
+      items: this.$store.state.candidate_point,
+      value: "",
     };
   },
   mounted() {},
