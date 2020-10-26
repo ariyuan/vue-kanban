@@ -9,10 +9,10 @@ const store = new Vuex.Store({ //定义vuex对象store
       {
         column_name: "Backlog",
         content: [
-          { title: "title 2", desc: "description 2", point: 2, owner: "Steve Gates" },
-          { title: "title 3", desc: "description 3", point: 2, owner: "Steve Gates" },
-          { title: "title 1", desc: "description 1", point: 2, owner: "Steve Gates" },
-          { title: "title 4", desc: "description 4", point: 2, owner: "Steve Gates" },
+          { title: "title 2", desc: "description 2", point: 1, owner: "Steve Gates" },
+          { title: "title 3", desc: "description 3", point: 2, owner: "Bill Gates" },
+          { title: "title 1", desc: "description 1", point: 3, owner: "Steve Jobs" },
+          { title: "title 4", desc: "description 4", point: 5, owner: "Tom Jackson" },
         ],
         showAddButton: true,
         columnclass: "alert-primary",

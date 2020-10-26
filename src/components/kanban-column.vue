@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-3">
     <div class="p-2 alert" :class="columnclass">
-      <h3>{{ column_name }}</h3>
+      <h3>{{ column_name }}({{total_point}})</h3>
       <draggable class="kanban-column" :list="arrList" group="tasks" animation="300" @add="add" @sort="sort">
         <div v-for="ele in arrList" :key="ele.title">
           <card :card="ele"></card>
@@ -43,6 +43,15 @@ export default {
       onAddingNewBlock: false,
       newTask: "",
     };
+  },
+  computed:{
+    total_point(){
+      let sum = 0;
+      this.arrList.forEach(ele=>{
+        sum = sum + ele.point;
+      })
+      return sum;
+    }
   },
   methods: {
     onInputLostfocus() {

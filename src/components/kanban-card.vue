@@ -2,17 +2,15 @@
   <div>
     <div class="card">
       <div class="card-body p-2">
-        <b-card-title title-tag="h5">{{card.title}}</b-card-title>
+        <b-card-title title-tag="h5">{{ card.title }}</b-card-title>
 
         <b-card-text class="small">
           {{ card.desc }}
         </b-card-text>
 
         <cardDetail :card="card"></cardDetail>
-        <v-chip x-small>
-          <v-avatar left class="green darken-1">{{card.point}}</v-avatar
-          >{{ card.owner}}</v-chip
-        >
+        <b-badge variant="primary" class="mr-2">{{ card.point }}</b-badge>
+        <v-chip x-small>{{ card.owner }}</v-chip>
       </div>
     </div>
   </div>
