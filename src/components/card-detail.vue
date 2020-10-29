@@ -16,14 +16,14 @@
           ></b-form-textarea>
           <br />
         </div>
-        <v-divider class="mx-2" vertical></v-divider>
+        <el-divider direction="vertical"></el-divider>
         <div class="col">
           <span>Assignee:</span>
           <div class="row container p-0 my-2">
-            <div class="col-10">
-              <v-chip class="ma-2" color="primary" outlined pill>
+            <div class="col pl-1">
+              <div class="mx-2 px-2 assignee" color="primary" outlined pill>
                 {{ card.owner }}
-              </v-chip>
+              </div>
             </div>
           </div>
           <span>Story Point:</span>
@@ -50,11 +50,11 @@ export default {
     };
   },
   mounted() {},
-  methods:{
-    onPointChanged(){
-      console.log(this.card.point)
-    }
-  }
+  methods: {
+    onPointChanged() {
+      console.log(this.card.point);
+    },
+  },
 };
 </script>
 
@@ -62,4 +62,19 @@ export default {
 #card-detail {
   min-height: 200px;
 }
+
+.assignee {
+  border-radius: 1rem;
+  background-color: darkgray;
+}
+
+.el-divider--vertical {
+    display: inline-block;
+    width: 1px;
+    height: auto;
+    margin: 0 8px;
+    vertical-align: middle;
+    position: relative;
+}
+
 </style>
