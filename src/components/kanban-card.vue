@@ -8,9 +8,21 @@
           {{ card.desc }}
         </b-card-text>
 
-        <cardDetail :card="card"></cardDetail>
-        <b-badge variant="primary" class="mr-2">{{ card.point }}</b-badge>
-        <v-chip x-small>{{ card.owner }}</v-chip>
+        <cardDetail :card="card" :card_id="card_id"></cardDetail>
+
+        <el-row :gutter="0">
+          <el-col :span="4"
+            ><b-badge variant="primary">{{
+              card.point
+            }}</b-badge></el-col
+          >
+          <el-col :span="18">
+            <div class="px-2 mt-1 assignee" color="primary" outlined pill>
+              {{ card.owner }}
+            </div></el-col
+          >
+          <el-col :span="1"><a href="#" @click="$bvModal.show(card_id)" class="float-right">...</a></el-col>
+        </el-row>
       </div>
     </div>
   </div>
@@ -24,6 +36,11 @@ export default {
     cardDetail,
   },
   props: ["card"],
+  data() {
+    return {
+      card_id: this._.uniqueId('card_')
+    }
+  },
   methods: {
     openDetail() {
       console.log("Open card detail");
@@ -31,3 +48,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.assignee {
+  border-radius: 1rem;
+  background-color: darkgray;
+  width: fit-content;
+  font-size: small;
+}
+</style>

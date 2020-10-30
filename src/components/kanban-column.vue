@@ -68,6 +68,7 @@ export default {
     add(){
       console.log("Dragged");
       console.log(this.$store.state.columns);
+      console.log(this);
     },
     sort(){
       console.log("Order changed");
