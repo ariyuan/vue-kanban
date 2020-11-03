@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-modal :id="card_id" :title="card.title" size="lg">
+    <b-modal :id="card_id" :title="card.title" size="lg" @ok="onSubmit">
       <div id="card-detail" class="container row">
         <div class="col-9">
           <span>Description:</span>
@@ -23,7 +23,7 @@
                 class="inline-input"
                 v-model="owner"
                 :fetch-suggestions="querySearch"
-                placeholder="请输入内容"
+                placeholder="Select Owner"
                 @select="handleSelect"
               ></el-autocomplete>
             </div>
@@ -31,8 +31,8 @@
           <span>Story Point:</span>
           <b-form-select
             @change="onPointChanged"
-            v-model="card.point"
-            :options="$store.state.candidate_point"
+            v-model="current_point"
+            :options="items"
             size="sm"
             class="mt-3"
           ></b-form-select>
@@ -47,13 +47,18 @@ export default {
   data() {
     return {
       items: this.$store.state.candidate_point,
-      value: "",
+      current_point: 0,
       owner: "",
       owner_candidate: this.$store.state.candidate_owner
     };
   },
-  mounted() {},
+  mounted() {
+    this.current_point = this._.deepClone(this.card.point);
+  },
   methods: {
+    onSubmit(){
+      this.card.point = this.current_point;
+    },
     onPointChanged() {
       console.log(this.card.point);
     },
@@ -74,7 +79,6 @@ export default {
       var results = queryString
         ? owners.filter(this.createFilter(queryString))
         : owners;
-      // 调用 callback 返回建议列表的数据
       cb(results);
     },
   },
