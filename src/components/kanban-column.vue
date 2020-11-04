@@ -15,7 +15,7 @@
               >+ Add new card</a
             >
             <b-form-input
-              v-model="newTask"
+              v-model="newTask.title"
               placeholder="Enter Task"
               @keyup.enter="addTask"
               v-if="onAddingNewBlock"
@@ -32,6 +32,16 @@
 import draggable from "vuedraggable";
 import card from "./kanban-card"
 
+function ComposeTask(task){
+  return {
+    title: task.title,
+    desc: "",
+    point: 0,
+    owner: "",
+    status: ""
+  };
+}
+
 export default {
   components: {
     draggable,
@@ -41,7 +51,7 @@ export default {
   data() {
     return {
       onAddingNewBlock: false,
-      newTask: "",
+      newTask: {},
     };
   },
   computed:{
@@ -59,9 +69,9 @@ export default {
       this.onAddingNewBlock = false;
     },
     addTask() {
-      if (this.newTask) {
-        this.arrList.push({ name: this.newTask });
-        this.newTask = "";
+      if (this.newTask.title != undefined || this.newTask.title != "") {
+        this.arrList.push(ComposeTask(this.newTask));
+        this.newTask = {};
         this.onAddingNewBlock = false;
       }
     },

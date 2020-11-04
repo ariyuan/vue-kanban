@@ -7,7 +7,7 @@
           <b-form-textarea
             id="textarea"
             class="mt-2"
-            v-model="card.desc"
+            v-model="current_desc"
             placeholder="Description placeholder"
             rows="3"
             max-rows="6"
@@ -21,7 +21,7 @@
             <div>
               <el-autocomplete
                 class="inline-input"
-                v-model="owner"
+                v-model="current_owner"
                 :fetch-suggestions="querySearch"
                 placeholder="Select Owner"
                 @select="handleSelect"
@@ -32,7 +32,7 @@
           <b-form-select
             @change="onPointChanged"
             v-model="current_point"
-            :options="items"
+            :options="candidate_point"
             size="sm"
             class="mt-3"
           ></b-form-select>
@@ -46,18 +46,23 @@ export default {
   props: ["card", "card_id"],
   data() {
     return {
-      items: this.$store.state.candidate_point,
+      candidate_point: this.$store.state.candidate_point,
+      owner_candidate: this.$store.state.candidate_owner,
       current_point: 0,
-      owner: "",
-      owner_candidate: this.$store.state.candidate_owner
+      current_owner: "",
+      current_desc: ""
     };
   },
   mounted() {
-    this.current_point = this._.deepClone(this.card.point);
+    this.current_point = this._.cloneDeep(this.card.point);
+    this.current_owner = this._.cloneDeep(this.card.owner);
+    this.current_desc = this._.cloneDeep(this.card.desc);
   },
   methods: {
     onSubmit(){
       this.card.point = this.current_point;
+      this.card.owner = this.current_owner;
+      this.card.desc = this.current_desc;
     },
     onPointChanged() {
       console.log(this.card.point);
