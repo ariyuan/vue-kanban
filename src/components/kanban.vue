@@ -1,5 +1,6 @@
 <template>
-  <div class="container-fluid mt-5">
+  <div class="container-fluid mt-5 ml-2">
+    <el-row :gutter="20">
       <draggable class="row mt-3" :list="columns" group="columns">
         <kanbanColumn
           v-for="item in columns"
@@ -10,6 +11,7 @@
           :columnclass="item.columnclass"
         ></kanbanColumn>
       </draggable>
+    </el-row>
   </div>
 </template>
 
@@ -24,8 +26,27 @@ export default {
   },
   data() {
     return {
-      columns: this.$store.state.columns
+      columns: this.$store.state.columns,
     };
+  },
+  mounted() {
+    console.log("kanban mounted");
   },
 };
 </script>
+
+<style>
+.el-row {
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.el-col {
+  border-radius: 8px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
+</style>
