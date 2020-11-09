@@ -1,6 +1,5 @@
 <template>
-  <el-col :span="6">
-    <div class="p-2 alert" :class="columnclass">
+    <div class="mx-2 px-1 alert col" :class="columnclass">
       <h3>{{ column_name }}({{total_point}})</h3>
       <draggable class="kanban-column" :list="arrList" group="tasks" animation="300" @add="add" @sort="sort">
         <div v-for="ele in arrList" :key="ele.title">
@@ -25,7 +24,6 @@
         </div>
       </draggable>
     </div>
-  </el-col>
 </template>
 
 <script>

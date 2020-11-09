@@ -1,8 +1,8 @@
 <template>
-  <div class="container-fluid mt-5 ml-2">
-    <el-row :gutter="20">
-      <el-col :span="21">
-        <draggable class="row mt-3" :list="columns" group="columns">
+  <b-container class="mt-5 ml-2">
+    <b-row>
+      <b-col cols="10">
+        <draggable class="mt-3 row" :list="columns" group="columns">
           <kanbanColumn
             v-for="item in columns"
             :key="item.column_name"
@@ -10,18 +10,16 @@
             :column_name="item.column_name"
             :showAddButton="item.showAddButton"
             :columnclass="item.columnclass"
-          ></kanbanColumn> </draggable
-      ></el-col>
-
-      <el-col :span="3" class="mt-3">
-        <a
-          href=""
-          @click.prevent="addNewColumn"
+          ></kanbanColumn>
+        </draggable>
+      </b-col>
+      <b-col class="mt-3">
+        <a href="" @click.prevent="addNewColumn(newColumnToAdd)"
           >New Column</a
-        ></el-col
+        ></b-col
       >
-    </el-row>
-  </div>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -36,14 +34,19 @@ export default {
   data() {
     return {
       columns: this.$store.state.columns,
+      newColumnToAdd: {
+        column_name: "NewColumn",
+        content: [],
+        showAddButton: false,
+        columnclass: "alert-primary",
+      },
     };
   },
-  methods:
-  {
-    addNewColumn(){
-      console.log("New Column");
-    }
-  }
+  methods: {
+    addNewColumn(newColumn) {
+      this.columns.push(newColumn);
+    },
+  },
 };
 </script>
 
