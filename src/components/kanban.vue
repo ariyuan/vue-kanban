@@ -1,25 +1,24 @@
 <template>
-  <b-container class="mt-5 ml-2">
-    <b-row>
-      <b-col cols="10">
-        <draggable class="mt-3 row" :list="columns" group="columns">
-          <kanbanColumn
-            v-for="item in columns"
-            :key="item.column_name"
-            :arrList="item.content"
-            :column_name="item.column_name"
-            :showAddButton="item.showAddButton"
-            :columnclass="item.columnclass"
-          ></kanbanColumn>
-        </draggable>
-      </b-col>
-      <b-col class="mt-3">
-        <a href="" @click.prevent="addNewColumn(newColumnToAdd)"
-          >New Column</a
-        ></b-col
-      >
-    </b-row>
-  </b-container>
+  <div :style="kanbanbase">
+    <b-container class="mt-5 ml-2" style="max-width: 100% !important">
+          <draggable class="mt-3 row" :list="columns" group="columns" style="flex-wrap: nowrap !important">
+            <kanbanColumn
+              v-for="item in columns"
+              :key="item.column_name"
+              :arrList="item.content"
+              :column_name="item.column_name"
+              :showAddButton="item.showAddButton"
+              :columnclass="item.columnclass"
+            ></kanbanColumn>
+                    <b-col class="mt-3">
+          <a href="" @click.prevent="addNewColumn(newColumnToAdd)"
+            >New Column</a
+          ></b-col
+        >
+          </draggable>
+
+    </b-container>
+  </div>
 </template>
 
 <script>
@@ -30,6 +29,13 @@ export default {
   components: {
     kanbanColumn,
     draggable,
+  },
+  computed: {
+    kanbanbase() {
+      const style = {};
+      style.minWidth = (this.columns.length + 1) * 200 + "px";
+      return style;
+    },
   },
   data() {
     return {
