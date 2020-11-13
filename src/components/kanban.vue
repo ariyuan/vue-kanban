@@ -1,22 +1,26 @@
 <template>
   <div :style="kanbanbase">
     <b-container class="mt-5 ml-2" style="max-width: 100% !important">
-          <draggable class="mt-3 row" :list="columns" group="columns" style="flex-wrap: nowrap !important">
-            <kanbanColumn
-              v-for="item in columns"
-              :key="item.column_name"
-              :arrList="item.content"
-              :column_name="item.column_name"
-              :showAddButton="item.showAddButton"
-              :columnclass="item.columnclass"
-            ></kanbanColumn>
-                    <b-col class="mt-3">
+      <draggable
+        class="mt-3 row"
+        :list="columns"
+        group="columns"
+        style="flex-wrap: nowrap !important"
+      >
+        <kanbanColumn
+          v-for="item in columns"
+          :key="item.column_name"
+          :arrList="item.content"
+          :column_name="item.column_name"
+          :showAddButton="item.showAddButton"
+          :columnclass="item.columnclass"
+        ></kanbanColumn>
+        <b-col class="mt-3">
           <a href="" @click.prevent="addNewColumn(newColumnToAdd)"
             >New Column</a
           ></b-col
         >
-          </draggable>
-
+      </draggable>
     </b-container>
   </div>
 </template>
@@ -41,7 +45,7 @@ export default {
     return {
       columns: this.$store.state.columns,
       newColumnToAdd: {
-        column_name: "NewColumn",
+        column_name: "Column",
         content: [],
         showAddButton: false,
         columnclass: "alert-primary",

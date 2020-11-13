@@ -89,5 +89,7 @@ export default {
 <style scoped>
 .kanban-column {
   min-height: 300px;
+  max-width: 300px;
+  min-width: 200px;
 }
 </style>
