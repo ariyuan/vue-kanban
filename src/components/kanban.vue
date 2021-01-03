@@ -54,7 +54,13 @@ export default {
   },
   methods: {
     addNewColumn(newColumn) {
-      this.columns.push(newColumn);
+      var _newColumn = this._.cloneDeep(newColumn)
+      this.columns.forEach(item => {
+        if(item.column_name == _newColumn.column_name){
+          _newColumn.column_name += "1"
+        }
+      });
+      this.columns.push(_newColumn);
     },
   },
 };
