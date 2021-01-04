@@ -1,70 +1,97 @@
 <template>
-    <div class="mx-2 px-1 alert col" :class="columnclass">
-      <h3>{{ column_name }}({{total_point}})</h3>
-      <draggable class="kanban-column" :list="arrList" group="tasks" animation="300" @add="add" @sort="sort">
-        <div v-for="ele in arrList" :key="ele.title">
-          <card :card="ele"></card>
+  <div class="mx-2 px-1 alert col" :class="columnclass">
+    <h3>
+      <div @click="changeColumnName" v-if="!onColumnNameChange">
+        {{ column_name }}({{ total_point }})
+      </div>
+      <div v-if="onColumnNameChange">
+        <el-input
+          autofocus
+          @blur="onInputLostfocus()"
+          v-model="newColumnName"
+          placeholder="Input Column Name"
+        ></el-input>
+      </div>
+    </h3>
+    <draggable
+      class="kanban-column"
+      :list="arrList"
+      group="tasks"
+      animation="300"
+      @add="add"
+      @sort="sort"
+    >
+      <div v-for="ele in arrList" :key="ele.title">
+        <card :card="ele"></card>
+      </div>
+      <div slot="footer">
+        <div v-if="showAddButton">
+          <a
+            href=""
+            @click.prevent="onAddingNewBlock = !onAddingNewBlock"
+            v-if="!onAddingNewBlock"
+            >+ Add new card</a
+          >
+          <b-form-input
+            v-model="newTask.title"
+            placeholder="Enter Task"
+            @keyup.enter="addTask"
+            v-if="onAddingNewBlock"
+            @blur="onInputLostfocus()"
+          ></b-form-input>
         </div>
-        <div slot="footer">
-          <div v-if="showAddButton">
-            <a
-              href=""
-              @click.prevent="onAddingNewBlock = !onAddingNewBlock"
-              v-if="!onAddingNewBlock"
-              >+ Add new card</a
-            >
-            <b-form-input
-              v-model="newTask.title"
-              placeholder="Enter Task"
-              @keyup.enter="addTask"
-              v-if="onAddingNewBlock"
-              @blur="onInputLostfocus()"
-            ></b-form-input>
-          </div>
-        </div>
-      </draggable>
-    </div>
+      </div>
+    </draggable>
+  </div>
 </template>
 
 <script>
 import draggable from "vuedraggable";
-import card from "./kanban-card"
+import card from "./kanban-card";
 
-function ComposeTask(task){
+function ComposeTask(task) {
   return {
     title: task.title,
     desc: "",
     point: 0,
     owner: "",
-    status: ""
+    status: "",
   };
 }
 
 export default {
   components: {
     draggable,
-    card
+    card,
   },
   props: ["showAddButton", "arrList", "columnclass", "column_name"],
   data() {
     return {
       onAddingNewBlock: false,
+      onColumnNameChange: false,
       newTask: {},
+      newColumnName: "",
     };
   },
-  computed:{
-    total_point(){
+  computed: {
+    total_point() {
       let sum = 0;
-      this.arrList.forEach(ele=>{
+      this.arrList.forEach((ele) => {
         sum = sum + ele.point;
-      })
+      });
       return sum;
-    }
+    },
   },
   methods: {
     onInputLostfocus() {
-      this.addTask();
-      this.onAddingNewBlock = false;
+      if (this.onAddingNewBlock) {
+        this.addTask();
+        this.onAddingNewBlock = false;
+      }
+      if (this.onColumnNameChange) {
+        console.log("column name changed");
+        this.onColumnNameChange = false;
+      }
     },
     addTask() {
       if (this.newTask.title != undefined || this.newTask.title != "") {
@@ -73,15 +100,18 @@ export default {
         this.onAddingNewBlock = false;
       }
     },
-    add(){
+    add() {
       console.log("Dragged");
       console.log(this.$store.state.columns);
       console.log(this);
     },
-    sort(){
+    sort() {
       console.log("Order changed");
       console.log(this.arrList);
-    }
+    },
+    changeColumnName() {
+      this.onColumnNameChange = !this.onColumnNameChange;
+    },
   },
 };
 </script>
