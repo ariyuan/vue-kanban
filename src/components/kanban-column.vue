@@ -6,7 +6,7 @@
       </div>
       <div v-if="onColumnNameChange">
         <el-input
-          autofocus
+          ref="inputColumnName"
           @blur="onInputLostfocus()"
           v-model="newColumnName"
           placeholder="Input Column Name"
@@ -111,6 +111,9 @@ export default {
     },
     changeColumnName() {
       this.onColumnNameChange = !this.onColumnNameChange;
+      this.$nextTick(() => {
+        this.$refs.inputColumnName.focus();
+      });
     },
   },
 };
