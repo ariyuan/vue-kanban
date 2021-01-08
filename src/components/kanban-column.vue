@@ -8,7 +8,7 @@
         <el-input
           ref="inputColumnName"
           @blur="onInputLostfocus()"
-          v-model="newColumnName"
+          v-model="column_name"
           placeholder="Input Column Name"
         ></el-input>
       </div>
