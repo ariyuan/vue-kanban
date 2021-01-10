@@ -2,13 +2,13 @@
   <div class="mx-2 px-1 alert col" :class="columnclass">
     <h3>
       <div @click="changeColumnName" v-if="!onColumnNameChange">
-        {{ column_name }}({{ total_point }})
+        {{ newColumnName }}({{ total_point }})
       </div>
       <div v-if="onColumnNameChange">
         <el-input
           ref="inputColumnName"
           @blur="onInputLostfocus()"
-          v-model="column_name"
+          v-model="newColumnName"
           placeholder="Input Column Name"
         ></el-input>
       </div>
@@ -70,7 +70,7 @@ export default {
       onAddingNewBlock: false,
       onColumnNameChange: false,
       newTask: {},
-      newColumnName: "",
+      newColumnName: this.column_name,
     };
   },
   computed: {
@@ -114,6 +114,7 @@ export default {
       this.$nextTick(() => {
         this.$refs.inputColumnName.focus();
       });
+      this.$emit('update:column_name', this.newColumnName);
     },
   },
 };
